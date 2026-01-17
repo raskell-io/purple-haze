@@ -1,0 +1,101 @@
+// =============================================================================
+// Theme Toggle - Clean, minimal design
+// =============================================================================
+
+.theme-toggle {
+  --toggle-size: 36px;
+  --icon-size: 18px;
+
+  position: relative;
+  width: var(--toggle-size);
+  height: var(--toggle-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+    background: var(--color-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+// Icon container
+.theme-toggle__icons {
+  position: relative;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+// All theme icons share these base styles
+.theme-toggle__sun,
+.theme-toggle__moon,
+.theme-toggle__auto {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: scale(0.8);
+
+  svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+}
+
+// Default: show moon (dark is default)
+.theme-toggle__moon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// When setting is light: show sun
+[data-theme-setting="light"] .theme-toggle {
+  .theme-toggle__moon {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  .theme-toggle__sun {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// When setting is dark: show moon
+[data-theme-setting="dark"] .theme-toggle {
+  .theme-toggle__moon {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// When setting is auto: show eclipse
+[data-theme-setting="auto"] .theme-toggle {
+  .theme-toggle__moon {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  .theme-toggle__auto {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
